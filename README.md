@@ -31,6 +31,7 @@ puush -h  	  # help
 - curl
 - xclip
 - notify-send
+- aplay
 
 
 ### Alternatives

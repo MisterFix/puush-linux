@@ -13,6 +13,7 @@ PUUSH_API_KEY=""
 # - zenity
 # - xclip
 # - notify-send
+# - aplay
 #
 # Licence : Beerware
 #
@@ -49,7 +50,8 @@ function puushFile ()
 	if [ ! -z "$fileURL" ]; then
 		#Copy link to clipboard, show notification
 		printf $fileURL | xclip -selection "clipboard"
-		notify-send -i "$( cd "$( dirname "$0" )" && pwd )/icon.png" -t 2000 "puush complete!" "$fileURL"
+		notify-send -i "$( dirname $( readlink -f "$0" ) )/icon.png" -t 2000 "puush complete!" "$fileURL"
+		aplay -q $( dirname $( readlink -f "$0" ) )/shot.wav
 	fi
 }
 
@@ -124,10 +126,10 @@ case "$1" in
 		helpText
 		exit 0
 		;;
-		
+
 	*)
 		echo "Upload $1"
 			puushFile "$1"
 		;;
-		
+
 esac
